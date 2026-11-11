@@ -1,17 +1,4 @@
-{\rtf1\ansi\ansicpg1252\cocoartf2709
-\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 .AppleSystemUIFontMonospaced-Regular;}
-{\colortbl;\red255\green255\blue255;\red80\green173\blue77;\red16\green16\blue16;\red187\green187\blue187;
-\red157\green88\blue173;\red212\green212\blue212;\red71\green71\blue71;\red191\green91\blue43;\red70\green137\blue204;
-}
-{\*\expandedcolortbl;;\cssrgb\c37255\c72157\c37255;\cssrgb\c7843\c7843\c7843;\cssrgb\c78039\c78039\c78039;
-\cssrgb\c68235\c44314\c73333;\cssrgb\c86275\c86275\c86275;\cssrgb\c34902\c34902\c34902;\cssrgb\c80000\c43922\c21961;\cssrgb\c33725\c61176\c83922;
-}
-\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
-\deftab720
-\pard\pardeftab720\partightenfactor0
-
-\f0\fs24 \cf2 \cb3 \expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec2 """Pydantic models \'97 every one mirrored by a TS interface in frontend/src/lib/types.ts."""\cf4 \cb1 \strokec4 \
+"""Pydantic models \'97 every one mirrored by a TS interface in frontend/src/lib/types.ts."""\cf4 \cb1 \strokec4 \
 \
 \cf5 \cb3 \strokec5 from\cf4 \strokec4  datetime \cf5 \strokec5 import\cf4 \strokec4  datetime\cb1 \
 \cf5 \cb3 \strokec5 from\cf4 \strokec4  typing \cf5 \strokec5 import\cf4 \strokec4  Literal\cf6 \strokec6 ,\cf4 \strokec4  Optional\cb1 \
