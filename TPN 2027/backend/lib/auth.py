@@ -1,15 +1,4 @@
-{\rtf1\ansi\ansicpg1252\cocoartf2709
-\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 .AppleSystemUIFontMonospaced-Regular;}
-{\colortbl;\red255\green255\blue255;\red51\green95\blue50;\red249\green249\blue249;\red45\green45\blue45;
-\red103\green38\blue120;\red0\green0\blue0;\red133\green40\blue2;}
-{\*\expandedcolortbl;;\cssrgb\c25490\c43922\c25490;\cssrgb\c98039\c98039\c98039;\cssrgb\c23137\c23137\c23137;
-\cssrgb\c48627\c23137\c54510;\cssrgb\c0\c0\c0;\cssrgb\c60000\c21961\c0;}
-\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
-\deftab720
-\pard\pardeftab720\partightenfactor0
-
-\f0\fs24 \cf2 \cb3 \expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec2 """Cookie-session auth: JWT in an httpOnly cookie, user + role re-read from Mongo on every request."""\cf4 \cb1 \strokec4 \
+"""Cookie-session auth: JWT in an httpOnly cookie, user + role re-read from Mongo on every request."""\cf4 \cb1 \strokec4 \
 \
 \pard\pardeftab720\partightenfactor0
 \cf5 \cb3 \strokec5 import\cf4 \strokec4  os\cb1 \
