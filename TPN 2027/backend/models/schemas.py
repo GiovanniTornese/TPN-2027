@@ -1,242 +1,240 @@
-"""Pydantic models \'97 every one mirrored by a TS interface in frontend/src/lib/types.ts."""\cf4 \cb1 \strokec4 \
-\
-\cf5 \cb3 \strokec5 from\cf4 \strokec4  datetime \cf5 \strokec5 import\cf4 \strokec4  datetime\cb1 \
-\cf5 \cb3 \strokec5 from\cf4 \strokec4  typing \cf5 \strokec5 import\cf4 \strokec4  Literal\cf6 \strokec6 ,\cf4 \strokec4  Optional\cb1 \
-\
-\cf5 \cb3 \strokec5 from\cf4 \strokec4  pydantic \cf5 \strokec5 import\cf4 \strokec4  BaseModel\cf6 \strokec6 ,\cf4 \strokec4  EmailStr\cf6 \strokec6 ,\cf4 \strokec4  Field\cf6 \strokec6 ,\cf4 \strokec4  field_validator\cf6 \strokec6 ,\cf4 \strokec4  model_validator\cb1 \
-\
-\cb3 Gender = Literal\cf6 \strokec6 [\cf2 \strokec2 "M"\cf6 \strokec6 ,\cf4 \strokec4  \cf2 \strokec2 "F"\cf6 \strokec6 ]\cf4 \cb1 \strokec4 \
-\cb3 Role = Literal\cf6 \strokec6 [\cf2 \strokec2 "admin"\cf6 \strokec6 ,\cf4 \strokec4  \cf2 \strokec2 "volunteer"\cf6 \strokec6 ]\cf4 \cb1 \strokec4 \
-\cb3 ShiftRole = Literal\cf6 \strokec6 [\cf2 \strokec2 "leader"\cf6 \strokec6 ,\cf4 \strokec4  \cf2 \strokec2 "member"\cf6 \strokec6 ]\cf4 \cb1 \strokec4 \
-\
-\cb3 DATE_PATTERN = r\cf2 \strokec2 "^\\d\{4\}-\\d\{2\}-\\d\{2\}$"\cf4 \cb1 \strokec4 \
-\cb3 HM_PATTERN = r\cf2 \strokec2 "^([01]\\d|2[0-3]):[0-5]\\d$"\cf4 \cb1 \strokec4 \
-\cb3 SLOT_PATTERN = r\cf2 \strokec2 "^([01]\\d|2[0-1]):[0-5]\\d$"\cf4 \strokec4   \cf7 \strokec7 # quick-pick 2h presets: last start 21:59\cf4 \cb1 \strokec4 \
-\
-\
-\cf7 \cb3 \strokec7 # ---------- users ----------\cf4 \cb1 \strokec4 \
-\cf5 \cb3 \strokec5 class\cf4 \strokec4  UserPublic\cf6 \strokec6 (\cf4 \strokec4 BaseModel\cf6 \strokec6 ):\cf4 \cb1 \strokec4 \
-\cb3     \cf5 \strokec5 id\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 str\cf4 \cb1 \strokec4 \
-\cb3     email\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 str\cf4 \cb1 \strokec4 \
-\cb3     role\cf6 \strokec6 :\cf4 \strokec4  Role\cb1 \
-\cb3     first_name\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 str\cf4 \strokec4  = \cf2 \strokec2 ""\cf4 \cb1 \strokec4 \
-\cb3     last_name\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 str\cf4 \strokec4  = \cf2 \strokec2 ""\cf4 \cb1 \strokec4 \
-\cb3     phone\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 str\cf4 \strokec4  = \cf2 \strokec2 ""\cf4 \cb1 \strokec4 \
-\cb3     gender\cf6 \strokec6 :\cf4 \strokec4  Optional\cf6 \strokec6 [\cf4 \strokec4 Gender\cf6 \strokec6 ]\cf4 \strokec4  = \cf5 \strokec5 None\cf4 \cb1 \strokec4 \
-\cb3     is_team_leader\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 bool\cf4 \strokec4  = \cf5 \strokec5 False\cf4 \cb1 \strokec4 \
-\cb3     has_password\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 bool\cf4 \strokec4  = \cf5 \strokec5 False\cf4 \cb1 \strokec4 \
-\
-\
-\cf5 \cb3 \strokec5 class\cf4 \strokec4  ProfileIn\cf6 \strokec6 (\cf4 \strokec4 BaseModel\cf6 \strokec6 ):\cf4 \cb1 \strokec4 \
-\cb3     first_name\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 str\cf4 \strokec4  = Field\cf6 \strokec6 (\cf4 \strokec4 min_length=\cf8 \strokec8 1\cf6 \strokec6 ,\cf4 \strokec4  max_length=\cf8 \strokec8 60\cf6 \strokec6 )\cf4 \cb1 \strokec4 \
-\cb3     last_name\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 str\cf4 \strokec4  = Field\cf6 \strokec6 (\cf4 \strokec4 min_length=\cf8 \strokec8 1\cf6 \strokec6 ,\cf4 \strokec4  max_length=\cf8 \strokec8 60\cf6 \strokec6 )\cf4 \cb1 \strokec4 \
-\cb3     phone\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 str\cf4 \strokec4  = Field\cf6 \strokec6 (\cf4 \strokec4 min_length=\cf8 \strokec8 5\cf6 \strokec6 ,\cf4 \strokec4  max_length=\cf8 \strokec8 30\cf6 \strokec6 )\cf4 \cb1 \strokec4 \
-\cb3     gender\cf6 \strokec6 :\cf4 \strokec4  Gender\cb1 \
-\
-\
-\cf5 \cb3 \strokec5 class\cf4 \strokec4  RegisterIn\cf6 \strokec6 (\cf4 \strokec4 ProfileIn\cf6 \strokec6 ):\cf4 \cb1 \strokec4 \
-\cb3     email\cf6 \strokec6 :\cf4 \strokec4  EmailStr\cb1 \
-\cb3     password\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 str\cf4 \strokec4  = Field\cf6 \strokec6 (\cf4 \strokec4 min_length=\cf8 \strokec8 6\cf6 \strokec6 ,\cf4 \strokec4  max_length=\cf8 \strokec8 128\cf6 \strokec6 )\cf4 \cb1 \strokec4 \
-\
-\
-\cf5 \cb3 \strokec5 class\cf4 \strokec4  VolunteerAdminIn\cf6 \strokec6 (\cf4 \strokec4 ProfileIn\cf6 \strokec6 ):\cf4 \cb1 \strokec4 \
-\cb3     is_team_leader\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 bool\cf4 \strokec4  = \cf5 \strokec5 False\cf4 \cb1 \strokec4 \
-\cb3     email\cf6 \strokec6 :\cf4 \strokec4  Optional\cf6 \strokec6 [\cf4 \strokec4 EmailStr\cf6 \strokec6 ]\cf4 \strokec4  = \cf5 \strokec5 None\cf4 \cb1 \strokec4 \
-\cb3     new_password\cf6 \strokec6 :\cf4 \strokec4  Optional\cf6 \strokec6 [\cf5 \strokec5 str\cf6 \strokec6 ]\cf4 \strokec4  = Field\cf6 \strokec6 (\cf4 \strokec4 default=\cf5 \strokec5 None\cf6 \strokec6 ,\cf4 \strokec4  min_length=\cf8 \strokec8 6\cf6 \strokec6 ,\cf4 \strokec4  max_length=\cf8 \strokec8 128\cf6 \strokec6 )\cf4 \cb1 \strokec4 \
-\
-\
-\cf5 \cb3 \strokec5 class\cf4 \strokec4  VolunteerCreateIn\cf6 \strokec6 (\cf4 \strokec4 RegisterIn\cf6 \strokec6 ):\cf4 \cb1 \strokec4 \
-\cb3     is_team_leader\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 bool\cf4 \strokec4  = \cf5 \strokec5 False\cf4 \cb1 \strokec4 \
-\
-\
-\cf5 \cb3 \strokec5 class\cf4 \strokec4  LoginIn\cf6 \strokec6 (\cf4 \strokec4 BaseModel\cf6 \strokec6 ):\cf4 \cb1 \strokec4 \
-\cb3     email\cf6 \strokec6 :\cf4 \strokec4  EmailStr\cb1 \
-\cb3     password\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 str\cf4 \cb1 \strokec4 \
-\
-\
-\cf5 \cb3 \strokec5 class\cf4 \strokec4  GoogleSessionIn\cf6 \strokec6 (\cf4 \strokec4 BaseModel\cf6 \strokec6 ):\cf4 \cb1 \strokec4 \
-\cb3     session_id\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 str\cf4 \strokec4  = Field\cf6 \strokec6 (\cf4 \strokec4 min_length=\cf8 \strokec8 1\cf6 \strokec6 )\cf4 \cb1 \strokec4 \
-\
-\
-\cf5 \cb3 \strokec5 class\cf4 \strokec4  CredentialsIn\cf6 \strokec6 (\cf4 \strokec4 BaseModel\cf6 \strokec6 ):\cf4 \cb1 \strokec4 \
-\cb3     email\cf6 \strokec6 :\cf4 \strokec4  EmailStr\cb1 \
-\cb3     current_password\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 str\cf4 \strokec4  = \cf2 \strokec2 ""\cf4 \cb1 \strokec4 \
-\cb3     new_password\cf6 \strokec6 :\cf4 \strokec4  Optional\cf6 \strokec6 [\cf5 \strokec5 str\cf6 \strokec6 ]\cf4 \strokec4  = Field\cf6 \strokec6 (\cf4 \strokec4 default=\cf5 \strokec5 None\cf6 \strokec6 ,\cf4 \strokec4  min_length=\cf8 \strokec8 6\cf6 \strokec6 ,\cf4 \strokec4  max_length=\cf8 \strokec8 128\cf6 \strokec6 )\cf4 \cb1 \strokec4 \
-\
-\
-\cf5 \cb3 \strokec5 class\cf4 \strokec4  VolunteerOut\cf6 \strokec6 (\cf4 \strokec4 UserPublic\cf6 \strokec6 ):\cf4 \cb1 \strokec4 \
-\cb3     shift_count\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 int\cf4 \strokec4  = \cf8 \strokec8 0\cf4 \cb1 \strokec4 \
-\cb3     upcoming_count\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 int\cf4 \strokec4  = \cf8 \strokec8 0\cf4 \cb1 \strokec4 \
-\
-\
-\cf7 \cb3 \strokec7 # ---------- config ----------\cf4 \cb1 \strokec4 \
-\cf5 \cb3 \strokec5 class\cf4 \strokec4  Station\cf6 \strokec6 (\cf4 \strokec4 BaseModel\cf6 \strokec6 ):\cf4 \cb1 \strokec4 \
-\cb3     key\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 str\cf4 \cb1 \strokec4 \
-\cb3     name\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 str\cf4 \cb1 \strokec4 \
-\cb3     color\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 str\cf4 \strokec4  = \cf2 \strokec2 "emerald"\cf4 \cb1 \strokec4 \
-\cb3     archived\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 bool\cf4 \strokec4  = \cf5 \strokec5 False\cf4 \cb1 \strokec4 \
-\
-\
-\cf5 \cb3 \strokec5 class\cf4 \strokec4  StationIn\cf6 \strokec6 (\cf4 \strokec4 BaseModel\cf6 \strokec6 ):\cf4 \cb1 \strokec4 \
-\cb3     name\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 str\cf4 \strokec4  = Field\cf6 \strokec6 (\cf4 \strokec4 min_length=\cf8 \strokec8 1\cf6 \strokec6 ,\cf4 \strokec4  max_length=\cf8 \strokec8 40\cf6 \strokec6 )\cf4 \cb1 \strokec4 \
-\
-\
-\cf5 \cb3 \strokec5 class\cf4 \strokec4  SlotsOut\cf6 \strokec6 (\cf4 \strokec4 BaseModel\cf6 \strokec6 ):\cf4 \cb1 \strokec4 \
-\cb3     slots\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 list\cf6 \strokec6 [\cf5 \strokec5 str\cf6 \strokec6 ]\cf4 \cb1 \strokec4 \
-\
-\
-\cf5 \cb3 \strokec5 class\cf4 \strokec4  SlotsIn\cf6 \strokec6 (\cf4 \strokec4 BaseModel\cf6 \strokec6 ):\cf4 \cb1 \strokec4 \
-\cb3     slots\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 list\cf6 \strokec6 [\cf5 \strokec5 str\cf6 \strokec6 ]\cf4 \strokec4  = Field\cf6 \strokec6 (\cf4 \strokec4 min_length=\cf8 \strokec8 1\cf6 \strokec6 ,\cf4 \strokec4  max_length=\cf8 \strokec8 16\cf6 \strokec6 )\cf4 \cb1 \strokec4 \
-\
-\cb3     \cf9 \strokec9 @field_validator\cf6 \strokec6 (\cf2 \strokec2 "slots"\cf6 \strokec6 )\cf4 \cb1 \strokec4 \
-\cb3     \cf9 \strokec9 @classmethod\cf4 \cb1 \strokec4 \
-\cb3     \cf5 \strokec5 def\cf4 \strokec4  check_slots\cf6 \strokec6 (\cf4 \strokec4 cls\cf6 \strokec6 ,\cf4 \strokec4  v\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 list\cf6 \strokec6 [\cf5 \strokec5 str\cf6 \strokec6 ])\cf4 \strokec4  -> \cf5 \strokec5 list\cf6 \strokec6 [\cf5 \strokec5 str\cf6 \strokec6 ]:\cf4 \cb1 \strokec4 \
-\cb3         \cf5 \strokec5 import\cf4 \strokec4  re\cb1 \
-\
-\cb3         \cf5 \strokec5 for\cf4 \strokec4  s \cf5 \strokec5 in\cf4 \strokec4  v\cf6 \strokec6 :\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 if\cf4 \strokec4  \cf5 \strokec5 not\cf4 \strokec4  re.\cf5 \strokec5 match\cf6 \strokec6 (\cf4 \strokec4 SLOT_PATTERN\cf6 \strokec6 ,\cf4 \strokec4  s\cf6 \strokec6 ):\cf4 \cb1 \strokec4 \
-\cb3                 \cf5 \strokec5 raise\cf4 \strokec4  ValueError\cf6 \strokec6 (\cf2 \strokec2 f"Orario non valido: \cf4 \strokec4 \{s\}\cf2 \strokec2  (formato HH:MM, max 21:00)"\cf6 \strokec6 )\cf4 \cb1 \strokec4 \
-\cb3         \cf5 \strokec5 return\cf4 \strokec4  \cf5 \strokec5 sorted\cf6 \strokec6 (\cf5 \strokec5 set\cf6 \strokec6 (\cf4 \strokec4 v\cf6 \strokec6 ))\cf4 \cb1 \strokec4 \
-\
-\
-\cf5 \cb3 \strokec5 class\cf4 \strokec4  TodayOut\cf6 \strokec6 (\cf4 \strokec4 BaseModel\cf6 \strokec6 ):\cf4 \cb1 \strokec4 \
-\cb3     today\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 str\cf4 \cb1 \strokec4 \
-\
-\
-\cf7 \cb3 \strokec7 # ---------- shifts ----------\cf4 \cb1 \strokec4 \
-\cf5 \cb3 \strokec5 class\cf4 \strokec4  ShiftIn\cf6 \strokec6 (\cf4 \strokec4 BaseModel\cf6 \strokec6 ):\cf4 \cb1 \strokec4 \
-\cb3     station\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 str\cf4 \strokec4  = Field\cf6 \strokec6 (\cf4 \strokec4 min_length=\cf8 \strokec8 1\cf6 \strokec6 )\cf4 \cb1 \strokec4 \
-\cb3     date\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 str\cf4 \strokec4  = Field\cf6 \strokec6 (\cf4 \strokec4 pattern=DATE_PATTERN\cf6 \strokec6 )\cf4 \cb1 \strokec4 \
-\cb3     start\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 str\cf4 \strokec4  = Field\cf6 \strokec6 (\cf4 \strokec4 pattern=HM_PATTERN\cf6 \strokec6 )\cf4 \cb1 \strokec4 \
-\cb3     end\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 str\cf4 \strokec4  = Field\cf6 \strokec6 (\cf4 \strokec4 pattern=HM_PATTERN\cf6 \strokec6 )\cf4 \cb1 \strokec4 \
-\
-\cb3     \cf9 \strokec9 @model_validator\cf6 \strokec6 (\cf4 \strokec4 mode=\cf2 \strokec2 "after"\cf6 \strokec6 )\cf4 \cb1 \strokec4 \
-\cb3     \cf5 \strokec5 def\cf4 \strokec4  check_range\cf6 \strokec6 (\cf5 \strokec5 self\cf6 \strokec6 ):\cf4 \cb1 \strokec4 \
-\cb3         \cf5 \strokec5 if\cf4 \strokec4  \cf5 \strokec5 self\cf4 \strokec4 .end <= \cf5 \strokec5 self\cf4 \strokec4 .start\cf6 \strokec6 :\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 raise\cf4 \strokec4  ValueError\cf6 \strokec6 (\cf2 \strokec2 "L'orario di fine deve essere successivo all'inizio"\cf6 \strokec6 )\cf4 \cb1 \strokec4 \
-\cb3         \cf5 \strokec5 return\cf4 \strokec4  \cf5 \strokec5 self\cf4 \cb1 \strokec4 \
-\
-\
-\cf5 \cb3 \strokec5 class\cf4 \strokec4  ShiftCreateIn\cf6 \strokec6 (\cf4 \strokec4 ShiftIn\cf6 \strokec6 ):\cf4 \cb1 \strokec4 \
-\cb3     repeat_until\cf6 \strokec6 :\cf4 \strokec4  Optional\cf6 \strokec6 [\cf5 \strokec5 str\cf6 \strokec6 ]\cf4 \strokec4  = Field\cf6 \strokec6 (\cf4 \strokec4 default=\cf5 \strokec5 None\cf6 \strokec6 ,\cf4 \strokec4  pattern=DATE_PATTERN\cf6 \strokec6 )\cf4 \cb1 \strokec4 \
-\
-\
-\cf5 \cb3 \strokec5 class\cf4 \strokec4  JoinIn\cf6 \strokec6 (\cf4 \strokec4 BaseModel\cf6 \strokec6 ):\cf4 \cb1 \strokec4 \
-\cb3     as_role\cf6 \strokec6 :\cf4 \strokec4  ShiftRole = \cf2 \strokec2 "member"\cf4 \cb1 \strokec4 \
-\
-\
-\cf5 \cb3 \strokec5 class\cf4 \strokec4  AssignIn\cf6 \strokec6 (\cf4 \strokec4 BaseModel\cf6 \strokec6 ):\cf4 \cb1 \strokec4 \
-\cb3     user_id\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 str\cf4 \cb1 \strokec4 \
-\cb3     as_role\cf6 \strokec6 :\cf4 \strokec4  ShiftRole = \cf2 \strokec2 "member"\cf4 \cb1 \strokec4 \
-\
-\
-\cf5 \cb3 \strokec5 class\cf4 \strokec4  ShiftVolunteer\cf6 \strokec6 (\cf4 \strokec4 BaseModel\cf6 \strokec6 ):\cf4 \cb1 \strokec4 \
-\cb3     \cf5 \strokec5 id\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 str\cf4 \cb1 \strokec4 \
-\cb3     first_name\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 str\cf4 \cb1 \strokec4 \
-\cb3     last_name\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 str\cf4 \cb1 \strokec4 \
-\cb3     gender\cf6 \strokec6 :\cf4 \strokec4  Optional\cf6 \strokec6 [\cf4 \strokec4 Gender\cf6 \strokec6 ]\cf4 \strokec4  = \cf5 \strokec5 None\cf4 \cb1 \strokec4 \
-\cb3     phone\cf6 \strokec6 :\cf4 \strokec4  Optional\cf6 \strokec6 [\cf5 \strokec5 str\cf6 \strokec6 ]\cf4 \strokec4  = \cf5 \strokec5 None\cf4 \strokec4   \cf7 \strokec7 # admin only\cf4 \cb1 \strokec4 \
-\
-\
-\cf5 \cb3 \strokec5 class\cf4 \strokec4  ShiftOut\cf6 \strokec6 (\cf4 \strokec4 BaseModel\cf6 \strokec6 ):\cf4 \cb1 \strokec4 \
-\cb3     \cf5 \strokec5 id\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 str\cf4 \cb1 \strokec4 \
-\cb3     station\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 str\cf4 \cb1 \strokec4 \
-\cb3     date\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 str\cf4 \cb1 \strokec4 \
-\cb3     start\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 str\cf4 \cb1 \strokec4 \
-\cb3     end\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 str\cf4 \cb1 \strokec4 \
-\cb3     leader\cf6 \strokec6 :\cf4 \strokec4  Optional\cf6 \strokec6 [\cf4 \strokec4 ShiftVolunteer\cf6 \strokec6 ]\cf4 \strokec4  = \cf5 \strokec5 None\cf4 \cb1 \strokec4 \
-\cb3     members\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 list\cf6 \strokec6 [\cf4 \strokec4 ShiftVolunteer\cf6 \strokec6 ]\cf4 \cb1 \strokec4 \
-\cb3     missing_leader\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 bool\cf4 \cb1 \strokec4 \
-\cb3     free_member_slots\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 int\cf4 \cb1 \strokec4 \
-\cb3     free_slots\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 int\cf4 \cb1 \strokec4 \
-\cb3     is_complete\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 bool\cf4 \cb1 \strokec4 \
-\cb3     is_mine\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 bool\cf4 \cb1 \strokec4 \
-\cb3     my_role\cf6 \strokec6 :\cf4 \strokec4  Optional\cf6 \strokec6 [\cf4 \strokec4 ShiftRole\cf6 \strokec6 ]\cf4 \strokec4  = \cf5 \strokec5 None\cf4 \cb1 \strokec4 \
-\cb3     has_ended\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 bool\cf4 \strokec4  = \cf5 \strokec5 False\cf4 \cb1 \strokec4 \
-\cb3     my_report_done\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 bool\cf4 \strokec4  = \cf5 \strokec5 False\cf4 \cb1 \strokec4 \
-\
-\
-\cf5 \cb3 \strokec5 class\cf4 \strokec4  ShiftBulkOut\cf6 \strokec6 (\cf4 \strokec4 BaseModel\cf6 \strokec6 ):\cf4 \cb1 \strokec4 \
-\cb3     created\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 list\cf6 \strokec6 [\cf4 \strokec4 ShiftOut\cf6 \strokec6 ]\cf4 \cb1 \strokec4 \
-\cb3     skipped_dates\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 list\cf6 \strokec6 [\cf5 \strokec5 str\cf6 \strokec6 ]\cf4 \cb1 \strokec4 \
-\
-\
-\cf5 \cb3 \strokec5 class\cf4 \strokec4  MonthUsageOut\cf6 \strokec6 (\cf4 \strokec4 BaseModel\cf6 \strokec6 ):\cf4 \cb1 \strokec4 \
-\cb3     month\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 str\cf4 \cb1 \strokec4 \
-\cb3     used\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 int\cf4 \cb1 \strokec4 \
-\cb3     limit\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 int\cf4 \cb1 \strokec4 \
-\
-\
-\cf7 \cb3 \strokec7 # ---------- reports (resoconto fine turno) ----------\cf4 \cb1 \strokec4 \
-\cf5 \cb3 \strokec5 class\cf4 \strokec4  ReportIn\cf6 \strokec6 (\cf4 \strokec4 BaseModel\cf6 \strokec6 ):\cf4 \cb1 \strokec4 \
-\cb3     hours\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 float\cf4 \strokec4  = Field\cf6 \strokec6 (\cf4 \strokec4 ge=\cf8 \strokec8 0.5\cf6 \strokec6 ,\cf4 \strokec4  le=\cf8 \strokec8 2\cf6 \strokec6 )\cf4 \cb1 \strokec4 \
-\cb3     publications\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 int\cf4 \strokec4  = Field\cf6 \strokec6 (\cf4 \strokec4 ge=\cf8 \strokec8 0\cf6 \strokec6 ,\cf4 \strokec4  le=\cf8 \strokec8 10000\cf6 \strokec6 )\cf4 \cb1 \strokec4 \
-\cb3     comment\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 str\cf4 \strokec4  = Field\cf6 \strokec6 (\cf4 \strokec4 default=\cf2 \strokec2 ""\cf6 \strokec6 ,\cf4 \strokec4  max_length=\cf8 \strokec8 2000\cf6 \strokec6 )\cf4 \cb1 \strokec4 \
-\
-\cb3     \cf9 \strokec9 @field_validator\cf6 \strokec6 (\cf2 \strokec2 "hours"\cf6 \strokec6 )\cf4 \cb1 \strokec4 \
-\cb3     \cf9 \strokec9 @classmethod\cf4 \cb1 \strokec4 \
-\cb3     \cf5 \strokec5 def\cf4 \strokec4  half_steps\cf6 \strokec6 (\cf4 \strokec4 cls\cf6 \strokec6 ,\cf4 \strokec4  v\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 float\cf6 \strokec6 )\cf4 \strokec4  -> \cf5 \strokec5 float\cf6 \strokec6 :\cf4 \cb1 \strokec4 \
-\cb3         \cf5 \strokec5 if\cf4 \strokec4  \cf5 \strokec5 round\cf6 \strokec6 (\cf4 \strokec4 v * \cf8 \strokec8 2\cf6 \strokec6 )\cf4 \strokec4  != v * \cf8 \strokec8 2\cf6 \strokec6 :\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 raise\cf4 \strokec4  ValueError\cf6 \strokec6 (\cf2 \strokec2 "Le ore vanno indicate a mezz'ore (0,5 \'96 1 \'96 1,5 \'96 2)"\cf6 \strokec6 )\cf4 \cb1 \strokec4 \
-\cb3         \cf5 \strokec5 return\cf4 \strokec4  v\cb1 \
-\
-\
-\cf5 \cb3 \strokec5 class\cf4 \strokec4  ReportOut\cf6 \strokec6 (\cf4 \strokec4 BaseModel\cf6 \strokec6 ):\cf4 \cb1 \strokec4 \
-\cb3     \cf5 \strokec5 id\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 str\cf4 \cb1 \strokec4 \
-\cb3     shift_id\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 str\cf4 \cb1 \strokec4 \
-\cb3     user_id\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 str\cf4 \cb1 \strokec4 \
-\cb3     user_name\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 str\cf4 \cb1 \strokec4 \
-\cb3     station\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 str\cf4 \cb1 \strokec4 \
-\cb3     date\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 str\cf4 \cb1 \strokec4 \
-\cb3     start\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 str\cf4 \cb1 \strokec4 \
-\cb3     end\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 str\cf4 \cb1 \strokec4 \
-\cb3     hours\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 float\cf4 \cb1 \strokec4 \
-\cb3     publications\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 int\cf4 \cb1 \strokec4 \
-\cb3     comment\cf6 \strokec6 :\cf4 \strokec4  Optional\cf6 \strokec6 [\cf5 \strokec5 str\cf6 \strokec6 ]\cf4 \strokec4  = \cf5 \strokec5 None\cf4 \strokec4   \cf7 \strokec7 # admin + author only\cf4 \cb1 \strokec4 \
-\cb3     updated_at\cf6 \strokec6 :\cf4 \strokec4  datetime\cb1 \
-\
-\
-\cf5 \cb3 \strokec5 class\cf4 \strokec4  MyReportsOut\cf6 \strokec6 (\cf4 \strokec4 BaseModel\cf6 \strokec6 ):\cf4 \cb1 \strokec4 \
-\cb3     total_hours\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 float\cf4 \cb1 \strokec4 \
-\cb3     total_publications\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 int\cf4 \cb1 \strokec4 \
-\cb3     reports\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 list\cf6 \strokec6 [\cf4 \strokec4 ReportOut\cf6 \strokec6 ]\cf4 \cb1 \strokec4 \
-\cb3     pending\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 list\cf6 \strokec6 [\cf4 \strokec4 ShiftOut\cf6 \strokec6 ]\cf4 \cb1 \strokec4 \
-\
-\
-\cf5 \cb3 \strokec5 class\cf4 \strokec4  VolunteerTotals\cf6 \strokec6 (\cf4 \strokec4 BaseModel\cf6 \strokec6 ):\cf4 \cb1 \strokec4 \
-\cb3     user_id\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 str\cf4 \cb1 \strokec4 \
-\cb3     user_name\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 str\cf4 \cb1 \strokec4 \
-\cb3     hours\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 float\cf4 \cb1 \strokec4 \
-\cb3     publications\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 int\cf4 \cb1 \strokec4 \
-\cb3     reports\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 int\cf4 \cb1 \strokec4 \
-\
-\
-\cf5 \cb3 \strokec5 class\cf4 \strokec4  AdminReportsOut\cf6 \strokec6 (\cf4 \strokec4 BaseModel\cf6 \strokec6 ):\cf4 \cb1 \strokec4 \
-\cb3     total_hours\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 float\cf4 \cb1 \strokec4 \
-\cb3     total_publications\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 int\cf4 \cb1 \strokec4 \
-\cb3     total_reports\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 int\cf4 \cb1 \strokec4 \
-\cb3     by_volunteer\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 list\cf6 \strokec6 [\cf4 \strokec4 VolunteerTotals\cf6 \strokec6 ]\cf4 \cb1 \strokec4 \
-\cb3     reports\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 list\cf6 \strokec6 [\cf4 \strokec4 ReportOut\cf6 \strokec6 ]\cf4 \cb1 \strokec4 \
-\
-\
-\cf5 \cb3 \strokec5 class\cf4 \strokec4  RemindersOut\cf6 \strokec6 (\cf4 \strokec4 BaseModel\cf6 \strokec6 ):\cf4 \cb1 \strokec4 \
-\cb3     tomorrow\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 str\cf4 \cb1 \strokec4 \
-\cb3     shifts\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 list\cf6 \strokec6 [\cf4 \strokec4 ShiftOut\cf6 \strokec6 ]\cf4 \cb1 \strokec4 \
-\
-\
-\cf7 \cb3 \strokec7 # ---------- announcements ----------\cf4 \cb1 \strokec4 \
-\cf5 \cb3 \strokec5 class\cf4 \strokec4  AnnouncementIn\cf6 \strokec6 (\cf4 \strokec4 BaseModel\cf6 \strokec6 ):\cf4 \cb1 \strokec4 \
-\cb3     title\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 str\cf4 \strokec4  = Field\cf6 \strokec6 (\cf4 \strokec4 min_length=\cf8 \strokec8 1\cf6 \strokec6 ,\cf4 \strokec4  max_length=\cf8 \strokec8 120\cf6 \strokec6 )\cf4 \cb1 \strokec4 \
-\cb3     body\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 str\cf4 \strokec4  = Field\cf6 \strokec6 (\cf4 \strokec4 min_length=\cf8 \strokec8 1\cf6 \strokec6 ,\cf4 \strokec4  max_length=\cf8 \strokec8 4000\cf6 \strokec6 )\cf4 \cb1 \strokec4 \
-\cb3     pinned\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 bool\cf4 \strokec4  = \cf5 \strokec5 False\cf4 \cb1 \strokec4 \
-\
-\
-\cf5 \cb3 \strokec5 class\cf4 \strokec4  Announcement\cf6 \strokec6 (\cf4 \strokec4 BaseModel\cf6 \strokec6 ):\cf4 \cb1 \strokec4 \
-\cb3     \cf5 \strokec5 id\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 str\cf4 \cb1 \strokec4 \
-\cb3     title\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 str\cf4 \cb1 \strokec4 \
-\cb3     body\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 str\cf4 \cb1 \strokec4 \
-\cb3     pinned\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 bool\cf4 \cb1 \strokec4 \
-\cb3     author_name\cf6 \strokec6 :\cf4 \strokec4  \cf5 \strokec5 str\cf4 \cb1 \strokec4 \
-\cb3     created_at\cf6 \strokec6 :\cf4 \strokec4  datetime\cb1 \
-\
-}
+"""Pydantic models — every one mirrored by a TS interface in frontend/src/lib/types.ts."""
+
+from datetime import datetime
+from typing import Literal, Optional
+
+from pydantic import BaseModel, EmailStr, Field, field_validator, model_validator
+
+Gender = Literal["M", "F"]
+Role = Literal["admin", "volunteer"]
+ShiftRole = Literal["leader", "member"]
+
+DATE_PATTERN = r"^\d{4}-\d{2}-\d{2}$"
+HM_PATTERN = r"^([01]\d|2[0-3]):[0-5]\d$"
+SLOT_PATTERN = r"^([01]\d|2[0-1]):[0-5]\d$"  # quick-pick 2h presets: last start 21:59
+
+
+# ---------- users ----------
+class UserPublic(BaseModel):
+    id: str
+    email: str
+    role: Role
+    first_name: str = ""
+    last_name: str = ""
+    phone: str = ""
+    gender: Optional[Gender] = None
+    is_team_leader: bool = False
+    has_password: bool = False
+
+
+class ProfileIn(BaseModel):
+    first_name: str = Field(min_length=1, max_length=60)
+    last_name: str = Field(min_length=1, max_length=60)
+    phone: str = Field(min_length=5, max_length=30)
+    gender: Gender
+
+
+class RegisterIn(ProfileIn):
+    email: EmailStr
+    password: str = Field(min_length=6, max_length=128)
+
+
+class VolunteerAdminIn(ProfileIn):
+    is_team_leader: bool = False
+    email: Optional[EmailStr] = None
+    new_password: Optional[str] = Field(default=None, min_length=6, max_length=128)
+
+
+class VolunteerCreateIn(RegisterIn):
+    is_team_leader: bool = False
+
+
+class LoginIn(BaseModel):
+    email: EmailStr
+    password: str
+
+
+class GoogleSessionIn(BaseModel):
+    session_id: str = Field(min_length=1)
+
+
+class CredentialsIn(BaseModel):
+    email: EmailStr
+    current_password: str = ""
+    new_password: Optional[str] = Field(default=None, min_length=6, max_length=128)
+
+
+class VolunteerOut(UserPublic):
+    shift_count: int = 0
+    upcoming_count: int = 0
+
+
+# ---------- config ----------
+class Station(BaseModel):
+    key: str
+    name: str
+    color: str = "emerald"
+    archived: bool = False
+
+
+class StationIn(BaseModel):
+    name: str = Field(min_length=1, max_length=40)
+
+
+class SlotsOut(BaseModel):
+    slots: list[str]
+
+
+class SlotsIn(BaseModel):
+    slots: list[str] = Field(min_length=1, max_length=16)
+
+    @field_validator("slots")
+    @classmethod
+    def check_slots(cls, v: list[str]) -> list[str]:
+        import re
+
+        for s in v:
+            if not re.match(SLOT_PATTERN, s):
+                raise ValueError(f"Orario non valido: {s} (formato HH:MM, max 21:00)")
+        return sorted(set(v))
+
+
+class TodayOut(BaseModel):
+    today: str
+
+
+# ---------- shifts ----------
+class ShiftIn(BaseModel):
+    station: str = Field(min_length=1)
+    date: str = Field(pattern=DATE_PATTERN)
+    start: str = Field(pattern=HM_PATTERN)
+    end: str = Field(pattern=HM_PATTERN)
+
+    @model_validator(mode="after")
+    def check_range(self):
+        if self.end <= self.start:
+            raise ValueError("L'orario di fine deve essere successivo all'inizio")
+        return self
+
+
+class ShiftCreateIn(ShiftIn):
+    repeat_until: Optional[str] = Field(default=None, pattern=DATE_PATTERN)
+
+
+class JoinIn(BaseModel):
+    as_role: ShiftRole = "member"
+
+
+class AssignIn(BaseModel):
+    user_id: str
+    as_role: ShiftRole = "member"
+
+
+class ShiftVolunteer(BaseModel):
+    id: str
+    first_name: str
+    last_name: str
+    gender: Optional[Gender] = None
+    phone: Optional[str] = None  # admin only
+
+
+class ShiftOut(BaseModel):
+    id: str
+    station: str
+    date: str
+    start: str
+    end: str
+    leader: Optional[ShiftVolunteer] = None
+    members: list[ShiftVolunteer]
+    missing_leader: bool
+    free_member_slots: int
+    free_slots: int
+    is_complete: bool
+    is_mine: bool
+    my_role: Optional[ShiftRole] = None
+    has_ended: bool = False
+    my_report_done: bool = False
+
+
+class ShiftBulkOut(BaseModel):
+    created: list[ShiftOut]
+    skipped_dates: list[str]
+
+
+class MonthUsageOut(BaseModel):
+    month: str
+    used: int
+    limit: int
+
+
+# ---------- reports (resoconto fine turno) ----------
+class ReportIn(BaseModel):
+    hours: float = Field(ge=0.5, le=2)
+    publications: int = Field(ge=0, le=10000)
+    comment: str = Field(default="", max_length=2000)
+
+    @field_validator("hours")
+    @classmethod
+    def half_steps(cls, v: float) -> float:
+        if round(v * 2) != v * 2:
+            raise ValueError("Le ore vanno indicate a mezz'ore (0,5 – 1 – 1,5 – 2)")
+        return v
+
+
+class ReportOut(BaseModel):
+    id: str
+    shift_id: str
+    user_id: str
+    user_name: str
+    station: str
+    date: str
+    start: str
+    end: str
+    hours: float
+    publications: int
+    comment: Optional[str] = None  # admin + author only
+    updated_at: datetime
+
+
+class MyReportsOut(BaseModel):
+    total_hours: float
+    total_publications: int
+    reports: list[ReportOut]
+    pending: list[ShiftOut]
+
+
+class VolunteerTotals(BaseModel):
+    user_id: str
+    user_name: str
+    hours: float
+    publications: int
+    reports: int
+
+
+class AdminReportsOut(BaseModel):
+    total_hours: float
+    total_publications: int
+    total_reports: int
+    by_volunteer: list[VolunteerTotals]
+    reports: list[ReportOut]
+
+
+class RemindersOut(BaseModel):
+    tomorrow: str
+    shifts: list[ShiftOut]
+
+
+# ---------- announcements ----------
+class AnnouncementIn(BaseModel):
+    title: str = Field(min_length=1, max_length=120)
+    body: str = Field(min_length=1, max_length=4000)
+    pinned: bool = False
+
+
+class Announcement(BaseModel):
+    id: str
+    title: str
+    body: str
+    pinned: bool
+    author_name: str
+    created_at: datetime
