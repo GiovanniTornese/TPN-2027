@@ -8,7 +8,7 @@ import { apiDelete, apiGet, apiPost } from "@/lib/api";
 import { errMsg, useMe } from "@/lib/hooks";
 import type { Announcement, AnnouncementIn } from "@/lib/types";
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
+import { Checkbox } from "../components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -139,7 +139,7 @@ export default function Board() {
             <label className="flex items-center gap-2 text-sm">
               <Checkbox
                 checked={form.pinned}
-                onCheckedChange={(c) => setForm({ ...form, pinned: c === true })}
+                onCheckedChange={(c: any) => setForm({ ...form, pinned: c === true })}
                 data-testid="announcement-pinned-checkbox"
               />
               Metti in evidenza
