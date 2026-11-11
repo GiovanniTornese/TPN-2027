@@ -7,7 +7,7 @@ import { errMsg, useSlots, useStations } from "@/lib/hooks";
 import { addHours } from "@/lib/shiftUi";
 import type { ShiftBulkOut, ShiftCreateIn, ShiftIn, ShiftOut, StationKey } from "@/lib/types";
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
+import { Checkbox } from "./ui/checkbox";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
