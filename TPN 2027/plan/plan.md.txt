@@ -1,0 +1,84 @@
+TPN 2027 – Responsabili di postazione, istruzioni e nuove regole di rinuncia
+Aggiunge il ruolo di responsabile di postazione, una pagina Istruzioni per ogni postazione con testo e foto, e la regola che blocca la rinuncia dal giorno prima del turno. Inoltre: una guida rapida all'uso dell'app nella home, che si può chiudere e riaprire, e il nuovo logo "pordenonepredica".
+A chi serve
+Amministratori (Giovanni Tornese, Andrea Volpicelli): nominano i responsabili e scrivono le istruzioni delle postazioni.
+Responsabili di postazione: volontari che organizzano turni e squadre della propria postazione senza dover chiedere all'admin.
+Volontari: leggono le istruzioni prima del turno, sanno chi avvisare se non possono andare e imparano a usare l'app dalla guida in home.
+Funzioni ed esperienza
+1. Responsabile di postazione
+In Gestione → Postazioni l'admin sceglie, per ogni postazione, uno o più responsabili tra i volontari. Una stessa persona può essere responsabile di più postazioni.
+Il responsabile resta un volontario: continua a iscriversi ai turni come prima.
+Cosa può fare, solo nelle sue postazioni:
+creare, modificare ed eliminare i turni, anche quelli ripetuti ogni settimana;
+assegnare e togliere volontari dai turni. Valgono le stesse regole dell'admin: il limite di 2 turni al mese non si applica, mentre restano validi capoturno uomo abilitato, 3 posti e nessuna sovrapposizione;
+vedere i turni scoperti della sua postazione;
+vedere i resoconti e i commenti dei turni della sua postazione: ore e pubblicazioni totali, dettaglio per volontario, commenti, con filtro per mese.
+Elenco volontari: il responsabile vede l'elenco di tutti i volontari con i loro dati (nome, genere, telefono, email, se è capoturno, turni in programma), con ricerca e pulsanti Chiama / WhatsApp. È solo in lettura.
+Cosa non può fare: modificare i dati dei volontari (nome, telefono, email, password), eliminare account, creare o eliminare postazioni, scrivere le istruzioni o la guida rapida, pubblicare avvisi in bacheca, vedere resoconti e commenti delle altre postazioni.
+Nelle altre postazioni vede i turni come un normale volontario.
+Nel profilo compare il distintivo "Responsabile · <nome postazione>".
+2. Pagina Istruzioni delle postazioni
+Nuova voce Istruzioni nel menu, visibile a tutti.
+Si apre con l'elenco delle postazioni, ognuna con il suo colore. Toccandone una si vede la sua pagina:
+nome e colore della postazione;
+responsabile/i: nome e telefono, con i pulsanti per chiamare e per scrivere su WhatsApp;
+testo delle istruzioni, con titoletti, elenchi puntati e grassetto;
+immagini, con una didascalia facoltativa; toccandole si ingrandiscono.
+Solo gli admin modificano le istruzioni, dal pulsante "Modifica" sulla pagina:
+scrivono il testo;
+caricano le foto dal telefono (galleria o fotocamera) o dal computer;
+riordinano o rimuovono le foto.
+Il nome del responsabile non si scrive a mano: viene preso da chi è stato nominato responsabile della postazione, quindi resta sempre aggiornato.
+3. Rinuncia al turno
+Il volontario può rinunciare fino a due giorni prima del turno. Esempio: per un turno di sabato, fino a giovedì compreso.
+Dal giorno prima e per tutto il giorno del turno il pulsante "Annulla iscrizione" è disattivato. Al suo posto compare l'avviso: "Non è più possibile rinunciare da solo. Avvisa il responsabile della postazione", con nome del responsabile e pulsanti Chiama / WhatsApp. Se la postazione non ha un responsabile, si mostrano i contatti degli admin.
+Lo stesso blocco vale anche se si prova a rinunciare in altro modo, non solo dal pulsante.
+Admin e responsabili della postazione possono sempre togliere un volontario dal turno, anche all'ultimo momento.
+4. Guida rapida nella home (Bacheca)
+In cima alla Bacheca compare la scheda "Come funziona l'app". Il testo iniziale, preparato da noi, è di 6 passi brevi:
+completa il profilo;
+scegli un turno e iscriviti, al massimo 2 al mese;
+leggi le istruzioni della postazione;
+ricevi il promemoria il giorno prima;
+se non puoi andare, rinuncia entro due giorni prima, altrimenti avvisa il responsabile;
+a fine turno inserisci ore e pubblicazioni.
+L'admin può riscrivere la guida da capo, dal pulsante "Modifica guida" sulla scheda: titolo e testo liberi, con titoletti, elenchi e grassetto. Può aggiungere, togliere o riscrivere tutti i passi. Se la guida viene modificata, ricompare aperta a tutti, così le novità vengono lette.
+Il pulsante "Ho capito, chiudi" la nasconde.
+Si riapre in qualsiasi momento dall'icona "?" in alto nell'intestazione.
+La scelta di chiuderla viene ricordata per ogni utente, anche se cambia telefono o computer.
+5. Nuovo logo
+Icona dell'app (intestazione, scheda del browser, icona sulla schermata del telefono): il logo rotondo senza scritte, che resta leggibile anche in piccolo.
+Pagine di accesso e registrazione: il logo rotondo con la scritta "pordenonepredica – TP PN Capitale della Cultura 2027", in grande.
+Il colore principale dell'app passa dall'azzurro attuale al blu del logo, così tutto è coordinato.
+Percorso utente
+Admin: Gestione → Postazioni → nomina Mario responsabile di "Teatro Verdi". Poi Istruzioni → Teatro Verdi → Modifica: scrive il testo, carica 2 foto del carrello, salva.
+Mario (responsabile): in Turni crea i turni della sua postazione e assegna i volontari, consultando l'elenco di tutti i volontari per trovare chi chiamare. A fine mese legge ore, pubblicazioni e commenti del Teatro Verdi. Le altre postazioni le vede come un volontario.
+Volontario:
+al primo accesso legge la guida in Bacheca e la chiude;
+si iscrive a un turno al Teatro Verdi e prima di andare legge le istruzioni con le foto;
+se ha un imprevisto tre giorni prima, rinuncia da solo;
+se succede il giorno prima, vede l'avviso e chiama o scrive a Mario con un tocco.
+Aspetto e sensazione
+Lo stile resta quello attuale: chiaro, pensato per il telefono, con pulsanti grandi e i colori delle postazioni. Cambiano solo il colore principale (blu del logo) e il logo.
+La pagina Istruzioni è comoda da leggere sul posto: testo grande e foto a tutta larghezza.
+Il menu in basso del volontario diventa: Bacheca · Turni · Istruzioni · Profilo. L'admin ha in più Gestione.
+Il responsabile vede i comandi di gestione (Nuovo turno, Assegna, Modifica, Elimina) solo sui turni delle sue postazioni.
+Il responsabile ha nel menu la voce "La mia postazione", con tre schede: Turni scoperti, Volontari (in lettura) e Resoconti. Il menu diventa: Bacheca · Turni · Istruzioni · Postazione · Profilo.
+Fasi di realizzazione
+Fase 1 – adesso (MVP): tutto quanto descritto sopra (responsabile di postazione, pagina Istruzioni con testo e foto caricate, rinuncia bloccata dal giorno prima con avviso, guida rapida chiudibile e riapribile, nuovo logo e colore).
+Fase 2 – in seguito (non inclusa ora): il responsabile riceve una notifica in app e via email quando un volontario della sua postazione rinuncia o quando un turno resta scoperto a pochi giorni dalla data.
+Fase 3 – in seguito (non inclusa ora): il volontario che non può andare propone il proprio posto ad altri, che lo accettano con un tocco; il responsabile approva lo scambio.
+Assunzioni (scelte fatte senza chiedere)
+Ogni postazione può avere più di un responsabile, e una persona può essere responsabile di più postazioni. Il responsabile si sceglie solo tra i volontari già registrati.
+I commenti dei volontari, finora riservati agli admin, diventano visibili anche al responsabile della postazione del turno. Non li vedono gli altri volontari né i responsabili di altre postazioni.
+L'elenco volontari del responsabile include anche le email.
+Le regole sui turni per il responsabile sono le stesse dell'admin: può superare il limite di 2 al mese e può assegnare anche turni passati.
+Il "giorno prima" si calcola con la data italiana. Per un turno di sabato l'ultimo giorno utile per rinunciare è giovedì, entro le 23:59.
+La regola del giorno prima vale anche per i turni appena creati o assegnati: se oggi è venerdì e il turno è sabato, non si può rinunciare da soli.
+La guida rapida contiene solo testo, senza foto, e la modificano solo gli admin, non i responsabili.
+Foto delle istruzioni:
+formati JPG, PNG e WEBP, massimo 10 MB ciascuna e 5 foto per postazione;
+le vedono solo gli utenti che hanno fatto l'accesso;
+sono salvate nello spazio di archiviazione gestito da Emergent, senza account esterni.
+Le istruzioni di una postazione eliminata restano salvate ma non vengono più mostrate.
+Logo: il logo quadrato non viene usato, perché le due versioni rotonde coprono tutti gli usi.

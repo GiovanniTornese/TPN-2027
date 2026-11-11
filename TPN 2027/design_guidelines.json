@@ -1,0 +1,147 @@
+{
+  "project_name": "VolontariTurni",
+  "app_context": "mobile_web_app",
+  "language": "it",
+  "theme": "light",
+  "brand_story": "Una piattaforma dedicata alle associazioni di volontariato per gestire la presenza sul territorio, coordinare i turni di 2 ore e garantire la composizione ideale di genere (almeno 1 Uomo e almeno 2 Donne su 3 volontari) con chiarezza visiva immediata e rispetto umano.",
+  "colors": {
+    "surfaces": [
+      {
+        "name": "page",
+        "kind": "solid",
+        "bg": "#F8FAFC",
+        "on_bg": "#0F172A",
+        "on_bg_muted": "#475569",
+        "roles": {
+          "link": "#0284C7",
+          "error": "#DC2626",
+          "success": "#16A34A",
+          "warning": "#D97706"
+        }
+      },
+      {
+        "name": "panel",
+        "kind": "solid",
+        "bg": "#FFFFFF",
+        "on_bg": "#0F172A",
+        "on_bg_muted": "#475569",
+        "roles": {
+          "border": "#E2E8F0",
+          "input_bg": "#F8FAFC"
+        }
+      },
+      {
+        "name": "inverse",
+        "kind": "solid",
+        "bg": "#0F172A",
+        "on_bg": "#FFFFFF",
+        "on_bg_muted": "#CBD5E1"
+      },
+      {
+        "name": "postazione_a_emerald",
+        "kind": "solid",
+        "bg": "#ECFDF5",
+        "on_bg": "#065F46",
+        "on_bg_muted": "#047857",
+        "roles": {
+          "badge_bg": "#10B981",
+          "badge_text": "#FFFFFF",
+          "border": "#A7F3D0"
+        }
+      },
+      {
+        "name": "postazione_b_indigo",
+        "kind": "solid",
+        "bg": "#EEF2FF",
+        "on_bg": "#3730A3",
+        "on_bg_muted": "#4338CA",
+        "roles": {
+          "badge_bg": "#6366F1",
+          "badge_text": "#FFFFFF",
+          "border": "#C7D2FE"
+        }
+      },
+      {
+        "name": "postazione_c_amber",
+        "kind": "solid",
+        "bg": "#FFFBEB",
+        "on_bg": "#92400E",
+        "on_bg_muted": "#B45309",
+        "roles": {
+          "badge_bg": "#F59E0B",
+          "badge_text": "#FFFFFF",
+          "border": "#FDE68A"
+        }
+      },
+      {
+        "name": "status_complete",
+        "kind": "solid",
+        "bg": "#DCFCE7",
+        "on_bg": "#14532D",
+        "on_bg_muted": "#166534"
+      },
+      {
+        "name": "status_incomplete",
+        "kind": "solid",
+        "bg": "#FEF3C7",
+        "on_bg": "#78350F",
+        "on_bg_muted": "#92400E"
+      },
+      {
+        "name": "status_gender_warning",
+        "kind": "solid",
+        "bg": "#FFE4E6",
+        "on_bg": "#881337",
+        "on_bg_muted": "#9F1239"
+      }
+    ],
+    "accent": "#0284C7",
+    "on_accent": "#FFFFFF"
+  },
+  "typography": {
+    "font_family_heading": "Outfit Variable, sans-serif",
+    "font_family_body": "Plus Jakarta Sans Variable, sans-serif",
+    "font_import": "@import \"@fontsource-variable/outfit\";\n@import \"@fontsource-variable/plus-jakarta-sans\";",
+    "scale_px": {
+      "display": 48,
+      "h1": 36,
+      "h2": 28,
+      "h3": 20,
+      "body": 16,
+      "caption": 14
+    }
+  },
+  "entry_surfaces": {
+    "/": "mobile-first clean dashboard shell with persistent bottom navigation and active shift highlight",
+    "/login": "centered branded authentication card on soft slate background with volunteer and admin preset shortcuts",
+    "/register": "structured registration card with gender selection, phone validation, and instant account activation"
+  },
+  "motion": {
+    "transitions": "transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease",
+    "animations": "staggered fade-up for shift cards, soft spring dialog animations, smooth badge pulse on pending gender requirement"
+  },
+  "accessibility": {
+    "contrast_standard": "WCAG AA (minimum 4.5:1 for body and badge text, verified against backgrounds)",
+    "mobile_touch_targets": "Minimum 44x44px for all buttons and interactive slots",
+    "aria_labels": "Explicit aria-labels on shift status indicators, postazione filters, and volunteer slot tags"
+  },
+  "image_urls": [],
+  "instructions_to_main_agent": [
+    "Implement the 3 default stations (Postazione A, Postazione B, Postazione C) with clear color coding: Emerald Green for A, Indigo for B, Amber/Warm for C.",
+    "Enforce the 3-volunteer shift rule strictly: each 2-hour shift has 3 slots, requiring at least 1 Uomo and at least 2 Donne. Block registrations that would violate this ratio and show descriptive status chips (e.g. 'Serve 1 Donna', 'Serve 1 Uomo', 'Completo').",
+    "Prevent volunteer overlapping: a volunteer cannot register for overlapping time slots across different stations.",
+    "Provide two primary shift views: Giornaliera (Day timeline) and Settimanale (Week grid/cards) with Postazione filter pills.",
+    "Implement full Admin management: create/edit/delete shifts, volunteer directory (anagrafica), custom station names in Configurazione, and Bacheca Avvisi (announcement board).",
+    "Volunteers can view available shifts, register with one tap, cancel their registration, update their profile (Genere Uomo/Donna, Nome, Cognome, Telefono), and read the Bacheca.",
+    "Design mobile-first with a bottom navigation bar for quick access (Turni, Bacheca, Mio Profilo / Admin Panel) and responsive desktop sidebar layout.",
+    "Add 'data-testid' attributes to all interactive buttons, inputs, filter tabs, registration buttons, and shift cards for testing reliability."
+  ],
+  "component_structure": {
+    "ShiftCard": "Displays time interval, station tag with color, 3 volunteer slots with gender icons, status badge, and action button (Iscriviti / Annulla Iscrizione)",
+    "ShiftFilterBar": "Segmented tabs for Day/Week view and filter pills for Stations A/B/C",
+    "BachecaFeed": "Announcements card list with pinned alerts, timestamp, and author badge",
+    "AdminShiftModal": "Modal for creating/editing 2-hour slot with station, date, and time selector",
+    "StationConfigPanel": "Admin panel to rename stations A, B, C and manage standard slot templates",
+    "VolunteerDirectory": "Searchable table/cards of registered volunteers with gender tag, phone number, and shift count"
+  }
+}

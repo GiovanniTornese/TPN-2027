@@ -1,0 +1,34 @@
+TPN 2027 - Pianificazione turni — App Spec
+Mobile-first web app (Italian UI) for a volunteer association to plan 2-hour shifts across 3 stations.
+Roles & auth
+Cookie session (httpOnly JWT session), routes /api/auth/{register,login,logout,me}. Role re-read from DB every request.
+Two admin accounts seeded ONCE (settings flag admins_seeded_v2): Giovanni Tornese (gnnitornese@gmail.com) and Andrea Volpicelli (andrea.volpicelli@tpn2027.it), password Admin123!. Each user changes own email/password via PUT /api/me/credentials (current password required if one is set).
+Google login (Emergent-managed): POST /api/auth/google {session_id} → find-or-create volunteer by email, sets same cookie. Google volunteers have gender=null/phone="" → frontend forces /profilo until completed. Email/password login stays available for all.
+Public registration creates only volunteer. is_team_leader (capoturno) flag set only by admin, men only.
+Volunteer profile: first_name, last_name, phone, gender (M=Uomo / F=Donna). PUT /api/me. Gender change blocked while subscribed to upcoming shifts.
+Data model (Mongo)
+users {id, email, password_hash, role, first_name, last_name, phone, gender}
+stations {key a|b|c, name} — seeded "Postazione A/B/C"; colors fixed by key (A emerald, B indigo, C amber). Rename: PUT /api/stations/{key} (admin).
+settings {key:"slots", slots:["08:00",...]} — configurable 2h start times (GET/PUT /api/settings/slots, max start 22:xx).
+shifts {id, station, date YYYY-MM-DD, start, end(=start+2h), leader_id|null, member_ids[≤2], volunteer_ids (=leader+members)} — unique (station,date,start).
+announcements {id, title, body, pinned, author_name, created_at}
+Shift rules
+3 people: 1 Capoturno (man with is_team_leader) + 2 volontari (any gender). POST /api/shifts/{id}/join {as_role: leader|member} atomic; 409 if seat taken; 403 leader if not enabled.
+Max 2 shifts per calendar month per volunteer (409); GET /api/shifts/my-usage?month=YYYY-MM. Overlap same day blocked (409), past shifts (400), non-volunteers (403), incomplete profile (400).
+POST /api/shifts/{id}/leave; admin DELETE /api/shifts/{id}/volunteers/{uid}. Admin CRUD on /api/shifts (start must be a configured slot).
+Output: leader, members, missing_leader, free_member_slots, free_slots, is_complete, is_mine, my_role; phone admin-only.
+GET /api/shifts/leading (any user): upcoming shifts where caller is capoturno, WITH members' phones (shown in Profilo for team leaders, with call + WhatsApp links).
+GET /api/shifts/uncovered (admin): upcoming shifts missing capoturno or a volunteer (Gestione → tab "Scoperti", default tab).
+Other endpoints
+/api/volunteers (admin): list with shift counts, create, PUT edit, DELETE (also removes from shifts).
+/api/announcements: GET (any user), POST/DELETE (admin).
+/api/today server date (APP_TZ=Europe/Rome).
+Frontend
+Nav order: / (Bacheca, first page), /turni (day/week view, station filters, "I miei turni", monthly usage badge), /profilo (profile + credentials), /admin (admin only: Volontari with capoturno toggle / Postazioni / Orari). /login, /register with Google button.
+Update (round 4)
+Stations are dynamic: {key, name, color(palette), order, archived}. POST /api/stations, PUT /api/stations/{key}, DELETE = archive (409 while it has future shifts; at least one must remain). Archived stations still returned so past shifts keep their name.
+Shifts have free start/end (ShiftIn {station,date,start,end}); slots are only "fasce rapide" 2h presets. POST /api/shifts accepts repeat_until → weekly copies (max 60), returns {created, skipped_dates}.
+POST /api/shifts/{id}/assign {user_id, as_role} (admin): place any volunteer or admin (self included). Skips ONLY the 2/month limit; capoturno (man enabled, or male admin), 3 seats and overlap still enforced. Past shifts allowed.
+Admin PUT /api/volunteers/{id} can also change email + set new_password (helping login). GET /api/volunteers?include_admins=true for the assign picker.
+Reports: PUT /api/shifts/{id}/report {hours 0.5..2 step 0.5, publications, comment} participant only, after shift end (APP_TZ). GET /api/reports/me (own totals + pending), GET /api/reports[?month=YYYY-MM] admin totals/by volunteer/comments. Comments visible to admin (and author) only. Reports kept when a volunteer is deleted.
+Reminders: in-app GET /api/me/reminders (tomorrow's shifts, shown on Bacheca with pending reports). Email: platform cron .emergent/crons.yml shift-reminders 18:00 Europe/Rome → POST /api/cron/reminders (Bearer WEBHOOK_CRON_SECRET), Emergent-managed email, one email per user per day (reminders_sent).
