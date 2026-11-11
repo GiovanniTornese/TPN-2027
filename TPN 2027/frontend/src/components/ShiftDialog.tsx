@@ -150,7 +150,7 @@ function ShiftForm({ onOpenChange, editing, defaultDate, defaultStation }: Props
         {!editing && (
           <div className="space-y-3 rounded-xl border border-slate-200 p-3">
             <label className="flex items-center gap-2 text-sm font-semibold">
-              <Checkbox checked={repeat} onCheckedChange={(c) => setRepeat(c === true)} data-testid="shift-dialog-repeat-checkbox" />
+              <Checkbox checked={repeat} onCheckedChange={(c: any) => setRepeat(c === true)} data-testid="shift-dialog-repeat-checkbox" />
               <Repeat className="size-4" /> Ripeti ogni settimana
             </label>
             {repeat && (
