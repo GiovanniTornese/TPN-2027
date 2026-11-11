@@ -209,7 +209,7 @@ function VolunteerForm({ editing, onDone }: { editing: VolunteerOut | null; onDo
         <div className="space-y-2"><Label>Genere</Label><GenderPicker value={gender} onChange={setGender} testidPrefix="volunteer-form" /></div>
         <label className={cn("flex items-center gap-2 rounded-xl border border-slate-200 p-3 text-sm", gender !== "M" && "opacity-50")}>
           <Checkbox checked={leader && gender === "M"} disabled={gender !== "M"}
-            onCheckedChange={(c) => setLeader(c === true)} data-testid="volunteer-form-leader-checkbox" />
+            onCheckedChange={(c: any) => setLeader(c === true)} data-testid="volunteer-form-leader-checkbox" />
           <span>
             <span className="flex items-center gap-1 font-semibold"><Crown className="size-3.5" /> Abilitato come Capoturno</span>
             <span className="text-xs text-slate-500">Solo per volontari uomini</span>
