@@ -238,3 +238,4 @@ class Announcement(BaseModel):
     pinned: bool
     author_name: str
     created_at: datetime
+    # PULITO
